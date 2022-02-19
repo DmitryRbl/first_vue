@@ -1,0 +1,40 @@
+image: node:10.0.0
+
+stages:
+  - build
+  # - test
+ # - deploy
+
+build:
+  stage: build
+  # cache:
+  #   key: nodemodules
+  #   paths:
+  #     - node_modules/
+  #   policy: push
+  #
+  script:
+    - cd ./hello-vue/
+    - echo "npm install"
+    - npm ci --progress=false
+    - npm run build
+  only:
+    changes:
+      - "hello-vue/**/*"
+  artifacts:
+    expire_in: 3 week
+    name: 'dist'
+    paths:
+      - ./hello-vue/dist/
+
+# test:
+#   stage: test
+#   cache:
+#     key: nodemodules
+#     policy: pull
+#     paths:
+#       - node_modules/
+#   script:
+#     - echo "unit test"
+#     - echo npm run test:unit
+
