@@ -4,7 +4,7 @@
 set -e
 
 # переход в каталог проекта
-cd hello-vue 
+cd 'hello-vue'
 # сборка
 npm run build
 
